@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+            color: rgb(4, 4, 4);
+        }
+
+        .btn {
+            border: 2px solid black;
+            border-radius: 8px;
+            padding: 3px;
+            color: black;
+            margin-top: 15px;
+        }
+
+        .form_div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+            padding: 10px;
+            align-items: center;
+            border: 2px solid rgb(23, 23, 23);
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>URL Shortener</h1>
+
+    <div class="form_div">
+        <form method="POST" action="/url">
+            <h2>Enter your URL</h2>
+            <input type="text" placeholder="https://example.com" name="url" required><br>
+            <button type="submit" class="btn">Generate</button>
+        </form>
+
+        <% if (locals.id) { %>
+            <p>Shortened URL:
+                <a href="http://localhost:8001/<%= id %>" target="_blank">
+                    http://localhost:8001/<%= id %>
+                </a>
+            </p>
+            <% } %>
+    </div>
+<% if (urls) { %>
+    <h3>List of Shortened URLs:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Short ID</th>
+                <th>Redirect URL</th>
+                <th>Clicks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% urls.forEach((url, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= url.shortID %></td>
+                    <td><%= url.redirectURL %></td>
+                    <td><%= url.visited.length %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No URLs found.</p>
+<% } %>
+
+
+</body>
+
+</html>
