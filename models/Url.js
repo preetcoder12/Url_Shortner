@@ -10,7 +10,11 @@ const urlSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    visited: [{ timestamp: { type: Number } }]
+    visited: [{ timestamp: { type: Number } }],
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user",
+    }
 }, { timestamps: true });
 
 const URL = mongoose.model('url', urlSchema);
