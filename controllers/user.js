@@ -10,11 +10,23 @@ async function HandleUserSignUp(req, res) {
         password,
     });
 
-    // After signup, redirect to the homepage
-    return res.render('home');  // Redirect to home page
+    return res.redirect('/');  // Redirect to home page
+}
+async function HandleUserLogin(req, res) {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email, password });
+    if (!user) {
+        return res.render("login", {
+            error: "Invalid username or password"
+        })
+    }
+
+    return res.redirect('/');  // Redirect to home page
 }
 
 
 module.exports = {
     HandleUserSignUp,
+    HandleUserLogin,
 }

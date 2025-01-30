@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <title>Login Page</title>
     <style>
         /* Reset some default browser styles */
         * {
@@ -99,15 +99,13 @@
 
 <body>
     <div class="container">
-        <h1>Sign Up Page</h1>
-        <form class="form" method="post" action="/user">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" required name="name">
+        <h1>Login Page</h1>
+        <form class="form" method="post" action="/user/login">
             <label for="email">Email</label>
             <input type="email" id="email" required name="email">
             <label for="password">Password</label>
             <input type="password" id="password" required name="password">
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">Log In</button>
         </form>
     </div>
 </body>
