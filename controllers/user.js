@@ -15,7 +15,6 @@ async function HandleUserSignUp(req, res) {
     // Redirect to login page after successful sign-up
     return res.redirect('/login');
 }
-
 async function HandleUserLogin(req, res) {
     const { email, password } = req.body;
 
@@ -49,8 +48,9 @@ async function HandleUserLogin(req, res) {
     });
 
     // Redirect to home page after successful login
-    return res.redirect('/');
+    return res.redirect('/'); // This ensures that after login, the user is redirected to the home page
 }
+
 
 module.exports = {
     HandleUserSignUp,
