@@ -15,7 +15,8 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f4e6ff;
+            /* Light purple background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,7 +27,8 @@
             background-color: #fff;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
+            /* Slight purple shadow */
             max-width: 400px;
             width: 100%;
         }
@@ -34,12 +36,14 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #6a1bbd;
+            /* Darker purple */
         }
 
         label {
             font-size: 14px;
-            color: #666;
+            color: #6a1bbd;
+            /* Darker purple */
             margin-bottom: 5px;
             display: block;
         }
@@ -48,35 +52,59 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid #c9a2ff;
+            /* Light purple border */
             border-radius: 4px;
             font-size: 16px;
             outline: none;
         }
 
         input:focus {
-            border-color: #5f9ea0;
+            border-color: #8a2be2;
+            /* Slight purple */
+            box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #5f9ea0;
+            background-color: #8a2be2;
+            /* Slight purple */
             color: #fff;
             border: none;
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button:hover {
-            background-color: #4e8c7a;
+            background-color: #6a1bbd;
+            /* Darker purple */
+            transform: scale(1.05);
         }
 
         .form {
             display: flex;
             flex-direction: column;
+        }
+
+        /* Slight Purple for Links */
+        a {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #8a2be2;
+            /* Slight purple */
+            text-decoration: none;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: #6a1bbd;
+            /* Darker purple */
+            text-decoration: underline;
         }
 
         /* Responsive Styles */
@@ -106,7 +134,8 @@
             <label for="password">Password</label>
             <input type="password" id="password" required name="password">
             <button type="submit" class="btn">Log In</button>
-        </form>
+        </form><br>
+        <a href="/signup">Create an account</a>
     </div>
 </body>
 

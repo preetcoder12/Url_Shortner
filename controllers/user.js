@@ -3,8 +3,21 @@ const bcrypt = require('bcrypt');
 const { setUser } = require('../service/auth');
 const User = require('../models/users');
 
+// In HandleUserSignUp function
 async function HandleUserSignUp(req, res) {
     const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        console.log("missing required fields");
+        return res.render("signup", { error: "All fields are required" }); // Pass error here
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+        console.log("Email already in use");
+
+        // Pass the error to the signup page
+        return res.render("signup", { error: "User exists with the same email" });
+    }
 
     // Hash the password before saving to the database
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -15,6 +28,9 @@ async function HandleUserSignUp(req, res) {
     // Redirect to login page after successful sign-up
     return res.redirect('/login');
 }
+
+
+
 async function HandleUserLogin(req, res) {
     const { email, password } = req.body;
 
