@@ -30,42 +30,35 @@ async function HandleUserSignUp(req, res) {
 }
 
 
-
 async function HandleUserLogin(req, res) {
     const { email, password } = req.body;
 
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-        return res.render("login", {
-            error: "Invalid username or password",
-        });
+        return res.render("login", { error: "Invalid username or password" });
     }
 
-    // Compare entered password with the stored hashed password
+    // Compare entered password with stored hash
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.render("login", {
-            error: "Invalid username or password",
-        });
+        return res.render("login", { error: "Invalid username or password" });
     }
 
-    // Create a unique session ID for the user (ensure it's unique per user session)
-    const sessionID = uuidv4();
+    // Generate JWT token
+    const token = setUser(user._id, user);
 
-    // Save session ID and user to the session storage
-    setUser(sessionID, user);
-
-    // Set the cookie with the session ID (uid)
-    res.cookie("uid", sessionID, {
-        httpOnly: true,  // Make the cookie inaccessible from JavaScript for security
-        secure: process.env.NODE_ENV === 'production',  // Secure cookie only in production (HTTPS)
-        maxAge: 3600000,  // Cookie expiration time (1 hour)
+    // Store JWT in cookies
+    res.cookie("uid", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 3600000, // 1 hour expiration
     });
 
-    // Redirect to home page after successful login
-    return res.redirect('/'); // This ensures that after login, the user is redirected to the home page
+    console.log("Login successful, redirecting to home...");
+    return res.redirect('/');
 }
+
 
 
 module.exports = {
